@@ -1,7 +1,7 @@
 package com.e_commerce.connection.model;
 
 import java.io.Serializable;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -14,11 +14,19 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 
 @Entity
 @Table (name ="product_reviews")
 @AllArgsConstructor
+@NoArgsConstructor
+@EqualsAndHashCode
+@Getter
+@Setter
 public class ProductReviews implements Serializable {
 
 	private static final long serialVersionUID = -3355213909823879180L;
@@ -30,10 +38,13 @@ public class ProductReviews implements Serializable {
 	@Column(name="rating")
 	private int rating;
 	
+	@Column(name="published")
+	private boolean published;
+	
 	@Column(name="created_date")
-	private LocalDate created_date;	
-	@Column(name="status")
-	private boolean status;
+	private LocalDateTime created_date;	
+	@Column(name="published_at")
+	private LocalDateTime publishedAt;	
 	
 	@Column(name="content",columnDefinition = "TEXT")
 	private String content;
@@ -41,7 +52,7 @@ public class ProductReviews implements Serializable {
 	private String title;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name ="product_id",referencedColumnName = "id")
+	@JoinColumn(name ="product_id",referencedColumnName = "product_id")
 	private Products product;
 	
 	

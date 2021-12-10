@@ -1,17 +1,14 @@
 package com.e_commerce.connection.model;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
@@ -21,30 +18,30 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(name="roles")
+@Table(name="order")
 @Getter
 @Setter
 @EqualsAndHashCode
 @AllArgsConstructor
 @NoArgsConstructor
-public class Roles implements Serializable {
+public class Order implements Serializable{
 
-	private static final long serialVersionUID = -8103333664597123158L;
+	private static final long serialVersionUID = -9136276474962921293L;
+
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="user_id")
-	private long userId;
-	 
+	@Column(name="order_id")
+	private long orderId;
+	
+	@Column(name="total_price")
+	private BigDecimal totalPrice;
+	
+	@Column(name="statusOder")
 	@Enumerated(EnumType.STRING)
-	@Column(name="role_name")
-	private RoleEnums roleName;
+	private StatusOrderEnum statusOder;
+	
 	
 	@Column(name="created_at")
 	private LocalDateTime createdAt;
 	@Column(name="update_at")
 	private LocalDateTime updateAt;
-	
-	@OneToMany(mappedBy = "role")
-	@Column(name="account_role_id")
-	private Set<AccountRoles> listAccountRole;
 }

@@ -5,8 +5,6 @@ import java.time.LocalDateTime;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.IdClass;
@@ -21,33 +19,31 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@IdClass(AccountRolePK.class)
-@Table(name="account_roles")
-@Getter
-@Setter
-@EqualsAndHashCode
+@IdClass(ProductCategoryPk.class)
+@Table(name="product_categorys")
 @AllArgsConstructor
 @NoArgsConstructor
-public class AccountRoles  implements Serializable{
-	private static final long serialVersionUID = -8698058005054218700L;
+@EqualsAndHashCode
+@Getter
+@Setter
+public class ProductCategorys implements Serializable{
+
+	private static final long serialVersionUID = 3096587588102953940L;
 
 	@Id
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "role_id",referencedColumnName = "user_id")
-	private Roles role;
+	@ManyToOne
+	@JoinColumn(name = "product_id",columnDefinition = "product_id")
+	private Products products;
 	
 	@Id
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name="account_id",referencedColumnName = "account_id")
-	private Accounts account;
-	
-	@Column(name="status")
-	@Enumerated(EnumType.STRING)
-	private StatusEnum status;
+	@JoinColumn(name = "category_id",columnDefinition = "category_id")
+	private Categorys categorys;
 	
 	@Column(name="created_at")
 	private LocalDateTime createdAt;
 	@Column(name="update_at")
 	private LocalDateTime updateAt;
+	
 	
 }

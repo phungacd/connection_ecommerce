@@ -35,12 +35,16 @@ public class Accounts implements Serializable{
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long id;
-	@Column(name="email_name",columnDefinition = "varchar(50)")
+	@Column(name="account_id")
+	private long accountId;
+	
+	@Column(name="email_name",columnDefinition = "varchar(30)")
 	private String emailName;
-	@Column(name="account_name",columnDefinition = "varchar(50)")
+	@Column(name="account_name",columnDefinition = "varchar(30)")
 	private String accountName;
-	@Column(name="password",columnDefinition = "varchar(255)")
+	@Column(name="phone_number",columnDefinition = "varchar(30)")
+	private String phoneNumber;
+	@Column(name="password",columnDefinition = "varchar(50)")
 	private String passWord;
 	@Column(name="confirm_email")
 	private String confirmEmail;
@@ -49,8 +53,8 @@ public class Accounts implements Serializable{
 	@Enumerated(EnumType.STRING)
 	private StatusEnum status;
 	
-	@Column(name="registered_at")
-	private LocalDateTime registeredAt;
+	@Column(name="created_at")
+	private LocalDateTime createdAt;
 	@Column(name="last_login")
 	private LocalDateTime lastLogin;
 	
@@ -59,6 +63,6 @@ public class Accounts implements Serializable{
 	private Set<AccountRoles> listAccountRole;
 	
 	@OneToOne
-	@JoinColumn(name="user_id",referencedColumnName = "id")
+	@JoinColumn(name="user_id",referencedColumnName = "user_id")
 	private Users user;
 }

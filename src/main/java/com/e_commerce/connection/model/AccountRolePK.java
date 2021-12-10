@@ -4,23 +4,42 @@ import java.io.Serializable;
 
 import javax.persistence.Embeddable;
 
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
-
 @Embeddable
-@AllArgsConstructor
-@NoArgsConstructor
 public class AccountRolePK implements Serializable{
 
 	private static final long serialVersionUID = -8208363926004600421L;	
-	private String role;
-	private String account;
+	private long role;
+	private long account;
+	
+	public AccountRolePK() {
+		super();
+	}
+	public AccountRolePK(long role, long account) {
+		super();
+		this.role = role;
+		this.account = account;
+	}
+	public long getRole() {
+		return role;
+	}
+	public void setRole(long role) {
+		this.role = role;
+	}
+	public long getAccount() {
+		return account;
+	}
+	public void setAccount(long account) {
+		this.account = account;
+	}
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((account == null) ? 0 : account.hashCode());
-		result = prime * result + ((role == null) ? 0 : role.hashCode());
+		result = prime * result + (int) (account ^ (account >>> 32));
+		result = prime * result + (int) (role ^ (role >>> 32));
 		return result;
 	}
 	@Override
@@ -32,33 +51,13 @@ public class AccountRolePK implements Serializable{
 		if (getClass() != obj.getClass())
 			return false;
 		AccountRolePK other = (AccountRolePK) obj;
-		if (account == null) {
-			if (other.account != null)
-				return false;
-		} else if (!account.equals(other.account))
+		if (account != other.account)
 			return false;
-		if (role == null) {
-			if (other.role != null)
-				return false;
-		} else if (!role.equals(other.role))
+		if (role != other.role)
 			return false;
 		return true;
 	}
-	public String getRole() {
-		return role;
-	}
-	public void setRole(String role) {
-		this.role = role;
-	}
-	public String getAccount() {
-		return account;
-	}
-	public void setAccount(String account) {
-		this.account = account;
-	}
-	public static long getSerialversionuid() {
-		return serialVersionUID;
-	}
+	
 	
 	
 }

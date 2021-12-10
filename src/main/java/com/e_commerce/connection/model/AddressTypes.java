@@ -5,11 +5,8 @@ import java.time.LocalDateTime;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
-import javax.persistence.IdClass;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -21,33 +18,30 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@IdClass(AccountRolePK.class)
-@Table(name="account_roles")
+@Table(name="delivery_address_types")
 @Getter
 @Setter
 @EqualsAndHashCode
 @AllArgsConstructor
 @NoArgsConstructor
-public class AccountRoles  implements Serializable{
-	private static final long serialVersionUID = -8698058005054218700L;
+public class AddressTypes implements Serializable{
 
-	@Id
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "role_id",referencedColumnName = "user_id")
-	private Roles role;
+	private static final long serialVersionUID = 3361769988140284162L;
+
 	
 	@Id
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name="account_id",referencedColumnName = "account_id")
-	private Accounts account;
+	@Column(name="address_type_id")
+	private long AddressTypeId;
 	
-	@Column(name="status")
-	@Enumerated(EnumType.STRING)
-	private StatusEnum status;
+	@Column(name="addressName",columnDefinition = "text")
+	private String addressName;
 	
 	@Column(name="created_at")
 	private LocalDateTime createdAt;
 	@Column(name="update_at")
 	private LocalDateTime updateAt;
 	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "delivery_address_id",columnDefinition = "delivery_address_id")
+	private DeliveryAddress deliveryAddress;
 }

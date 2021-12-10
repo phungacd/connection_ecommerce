@@ -2,16 +2,16 @@ package com.e_commerce.connection.model;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
 import javax.persistence.Id;
-import javax.persistence.IdClass;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
@@ -21,33 +21,42 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@IdClass(AccountRolePK.class)
-@Table(name="account_roles")
+@Table(name="delivery_address")
 @Getter
 @Setter
 @EqualsAndHashCode
 @AllArgsConstructor
 @NoArgsConstructor
-public class AccountRoles  implements Serializable{
-	private static final long serialVersionUID = -8698058005054218700L;
+public class DeliveryAddress implements Serializable{
+
+	private static final long serialVersionUID = -3027629014124210213L;
 
 	@Id
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "role_id",referencedColumnName = "user_id")
-	private Roles role;
+	@Column(name="delivery_address_id")
+	private long deliveryAddressid;
 	
-	@Id
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name="account_id",referencedColumnName = "account_id")
-	private Accounts account;
+	@Column(name="user_name")
+	private String userName;
 	
-	@Column(name="status")
+	@Column(name="phone_number")
+	private String phoneNumber;
+	@Column(name="addressDetail")
+	private String addressDetail;
+	
+	@Column(name = "status")
 	@Enumerated(EnumType.STRING)
-	private StatusEnum status;
+	private StatusDeliveryAddressEnum status;
 	
 	@Column(name="created_at")
 	private LocalDateTime createdAt;
 	@Column(name="update_at")
 	private LocalDateTime updateAt;
 	
+	@OneToMany(mappedBy = "deliveryAddress")
+	@Column(name="address_type-id")
+	private Set<AddressTypes> listAddressType;
+	
+	@ManyToOne
+	@JoinColumn(name = "user_id",referencedColumnName = "user_id")
+	private Users user;
 }

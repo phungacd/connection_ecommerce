@@ -1,12 +1,11 @@
 package com.e_commerce.connection.model;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.IdClass;
@@ -21,33 +20,34 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@IdClass(AccountRolePK.class)
-@Table(name="account_roles")
+@Table(name="cart_item")
 @Getter
 @Setter
 @EqualsAndHashCode
 @AllArgsConstructor
 @NoArgsConstructor
-public class AccountRoles  implements Serializable{
-	private static final long serialVersionUID = -8698058005054218700L;
+@IdClass(CartItemPK.class)
+public class CartItems implements Serializable{
+
+	private static final long serialVersionUID = -5864523027821442941L;
 
 	@Id
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "role_id",referencedColumnName = "user_id")
-	private Roles role;
+	@JoinColumn(name="product_id",referencedColumnName = "product_id")
+	private Products products;
 	
 	@Id
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name="account_id",referencedColumnName = "account_id")
-	private Accounts account;
+	@JoinColumn(name="cart_id",referencedColumnName = "cart_id")
+	private Carts carts;
 	
-	@Column(name="status")
-	@Enumerated(EnumType.STRING)
-	private StatusEnum status;
+	@Column(name="quantity")
+	private BigDecimal toltalPrice;
+	@Column(name="quantity")
+	private int quantity;
 	
 	@Column(name="created_at")
 	private LocalDateTime createdAt;
 	@Column(name="update_at")
 	private LocalDateTime updateAt;
-	
 }
