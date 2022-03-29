@@ -10,6 +10,8 @@ import javax.persistence.Enumerated;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.e_commerce.connection.commom.DiscountEnum;
+
 @Entity
 @Table(name="discounts")
 public class Discounts implements Serializable {
@@ -31,7 +33,7 @@ public class Discounts implements Serializable {
 	
 	@Column(name="statusDiscount")
 	@Enumerated(EnumType.STRING)
-	private StatusDiscountEnum statusDiscount;
+	private DiscountEnum statusDiscount;
 	
 	@Column(name="discount_start")
 	private LocalDateTime discountStart;

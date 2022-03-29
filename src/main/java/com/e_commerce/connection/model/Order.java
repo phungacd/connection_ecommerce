@@ -11,6 +11,8 @@ import javax.persistence.Enumerated;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.e_commerce.connection.commom.OrderEnum;
+
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -37,7 +39,7 @@ public class Order implements Serializable{
 	
 	@Column(name="statusOder")
 	@Enumerated(EnumType.STRING)
-	private StatusOrderEnum statusOder;
+	private OrderEnum statusOder;
 	
 	
 	@Column(name="created_at")

@@ -14,6 +14,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.e_commerce.connection.commom.DeliveryAddressEnum;
+
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -45,7 +47,7 @@ public class DeliveryAddress implements Serializable{
 	
 	@Column(name = "status")
 	@Enumerated(EnumType.STRING)
-	private StatusDeliveryAddressEnum status;
+	private DeliveryAddressEnum status;
 	
 	@Column(name="created_at")
 	private LocalDateTime createdAt;
